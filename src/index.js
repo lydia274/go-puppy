@@ -4,9 +4,11 @@
 const gameArea = document.querySelector("main") //the game area
 const gameAreaBounding = gameArea.getBoundingClientRect() // limits of the gaming area
 const gameOver = document.getElementById("end-game") // game over 
-const startGameScreen = document.querySelector(".start-game") //SCREEN start game
+const startGameScreen = document.getElementById("start-game") //SCREEN start game
 const startGameButton = document.getElementById("start-game-btn") // BUTTON start game 
-startGameButton.addEventListener("click", startGame)
+startGameButton.addEventListener('click', startGame)
+  startGameButton.addEventListener('click', function() {
+    startGameScreen.classList.add('hidden')})
 
 
 const speed = 5
@@ -119,7 +121,6 @@ class Enemy {
 
 class Game {
 
-
 	constructor() {
 		this.player = new Player()
 		this.Enemy = new Enemy()
@@ -191,6 +192,8 @@ window.addEventListener("keyup", handleReleasedKeys)
 
 function startGame() {
 	new Game()
+	;
+
 }
 
 function handlePressedKeys(event) {

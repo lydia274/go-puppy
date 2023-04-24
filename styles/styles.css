@@ -81,14 +81,14 @@ main {
 }
 
 #end-game  {
-    color: white;
+    /* color: white;
     font-size: 0.8rem; 
     text-align: center;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 12px;
     border: solid 1px white;
     width: 20vw;
-    height: 20vh;
+    height: 20vh; */
 }
 
 /* the start game screen */
@@ -97,7 +97,8 @@ h1{
     font-size: 1rem;
 }
 
-.start-game{
+/* start game & game over messages */
+.message{
     position: absolute;
     color: white;
     background-color: rgba(255, 0, 0, 0);
@@ -109,8 +110,8 @@ h1{
     top: 30vh;
     left: 1.5vw;
     font-size: 0.8rem;
-
 }
+
 button{ 
     background-color: rgba(255, 255, 255, 0);
     font-weight: bold;
@@ -125,3 +126,4 @@ button{
 .hidden {
     display: none;
 }
+

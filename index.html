@@ -9,25 +9,28 @@
 		<title>Racing</title>
 	</head>
 	<body>
-		
+	
 		<main class = "gameArea">
-			<div class="start-game">
+			<!-- the game start screen -->
+			<div class="message" id="start-game">
 				<h1>Race day!</h1>
 				<article>Move left and right using the arrow keys to avoid collision</article>
 				<article>Press 'up' to speed up</article> 
 				<button id="start-game-btn">Start</button>
-			</div>
+			  </div>
 
-			<div class = "legend">
+			<!-- the indicators at the top of the screen -->
+			<div class = "legend"> 
 				<article id = "score">Score:</article>
 				<article id = "life">Level:</article>
 				<article id = "level">Life:</article>
 			</div>
+			<!-- the game over screen -->
+			<dialog id="end-game" class="message hidden">
+				<h1>Game over</h1>
+				<button id="restart">Restart</button>
+			</dialog>
 		</main>
 
-		<dialog id="end-game" class="hidden">
-			<h1>Game over</h1>
-			<button id="restart">Restart</button>
-		</dialog>
 	</body>
 </html>
