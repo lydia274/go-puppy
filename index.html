@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./styles/styles.css" />
+		<script src="./src/index.js" type="module"></script>
+		<title>Racing</title>
+	</head>
+	<body>
+		
+		<main class = "gameArea">
+			<div class="start-game">
+				<h1>Race day!</h1>
+				<article>Move left and right using the arrow keys to avoid collision</article>
+				<article>Press 'up' to speed up</article> 
+				<button id="start-game-btn">Start</button>
+			</div>
+
+			<div class = "legend">
+				<article id = "score">Score:</article>
+				<article id = "life">Level:</article>
+				<article id = "level">Life:</article>
+			</div>
+		</main>
+
+		<dialog id="end-game" class="hidden">
+			<h1>Game over</h1>
+			<button id="restart">Restart</button>
+		</dialog>
+	</body>
+</html>
