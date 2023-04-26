@@ -6,19 +6,20 @@ const gameAreaBounding = gameArea.getBoundingClientRect() // limits of the gamin
 const gameOver = document.getElementById("end-game") // game over 
 const startGameScreen = document.getElementById("start-game") //SCREEN start game
 const startGameButton = document.getElementById("start-game-btn") // BUTTON start game 
+
 startGameButton.addEventListener('click', startGame)
-  startGameButton.addEventListener('click', function() {
-    startGameScreen.classList.add('hidden')})
 
+startGameButton.addEventListener('click', function() {
+	startGameScreen.classList.add('hidden')
+	})
 
-const speed = 5
-const enemies = []
-const life = 3
-const pressedKeys = {
-	left: false,
-	right: false,
-}
-let game = null
+	const speed = 5
+	const life = 3
+	const pressedKeys = {
+		left: false,
+		right: false,
+	}		
+	let game = null
 
 
 
@@ -73,126 +74,166 @@ class Player {
 class Enemy {
 
 	constructor() {
-		this.element = this.Enemy() 
-		this.x = Math.floor(Math.random()* gameArea.clientWidth) 
+		this.element = this.createEnemy() 
+		this.bounding = this.element.getBoundingClientRect()
+		this.x = Math.round(Math.random() * (gameArea.clientWidth - this.bounding.width)); //trying to set the initial x axis position for each new enemy with a step
 		this.y = gameArea.clientHeight * 0.05
-
 		this.setPosition()
 	}
 
-	Enemy() {
+	width() {
+
+	}
+
+	createEnemy() {
 		const div = document.createElement("div")
 		div.classList.add("enemy")
 		gameArea.append(div)
 		return div
 	}
-
+	
 	setPosition() {
 		this.element.style.left = `${this.x}px`
 		this.element.style.top = `${this.y}px`
 	}
-
-	move() {
-
-		this.y += 1 // vertical movement
-		const EnemyBounding = this.element.getBoundingClientRect()
-		 if (EnemyBounding.right >= gameAreaBounding.right) {
-		
-		this.direction.x = -1
-		 }
-		if (EnemyBounding.left <= gameAreaBounding.left) {
-			this.direction.x = 1
-		 }
-
-		 
-
-		// // if (EnemyBounding.bottom >= gameAreaBounding.bottom) {
-		// // 	this.direction.y = -1
-		// // }
-		// if (EnemyBounding.top <= gameAreaBounding.top) {
-		// 	this.direction.y = 1
-		// }
-
-		this.setPosition()
+	
+	moveEnemy() {
+		this.y++ //making it move
+				
 	}
-
 
 }
 
-class Game {
 
+
+class Game {
+	
 	constructor() {
 		this.player = new Player()
-		this.Enemy = new Enemy()
+		this.enemies = []
 		this.intervalId = null
-		this.scoreNum = 0
+		this.counter = 0
+		this.lifeCounter = 3
+		this.delay = 1500
 		this.animate()
-
+		this.createEnemy()	
+		this.playerBody = this.player.element.getBoundingClientRect()
+		
+		
+		
 	}
+
+	
+	createEnemy(){
+		setTimeout(()=>{
+			let newEnemy = new Enemy()
+			this.enemies.push(newEnemy)
+			
+			this.createEnemy()
+		}, this.delay)
+	}
+	
 
 	animate() {
 		this.intervalId = setInterval(() => {
-			if (this.collisionDetection()) {
-				this.Enemy.direction.y = -1
-			}
+			this.enemies.forEach((enemy) => {
+				enemy.moveEnemy()
+				enemy.setPosition()
+				this.countScore(enemy) 
+				this.crash(enemy) //HERE trying to check for collision
+			})
 
 			if (pressedKeys.right) {
 				this.player.move("right")
 			}
+
 			if (pressedKeys.left) {
-				this.player.move("left")
-			}
-
-			this.Enemy.move()
-			if (this.enemyPassed()) {
-				//scoreNum++
-				
-			}
-		}, 1000 / 60)
-	}
-
-	gameOver() {
-		if(this.life < 0){
-			clearInterval(this.intervalId)
-			gameOver.showModal()
-			gameOver.classList.remove('hidden')
-
-
+				this.player.move("left")	
+				}
+			}, 1500 / 60) //animation speed
 		}
-	}
-	enemyPassed() {
-		const EnemyBounding = this.Enemy.element.getBoundingClientRect()
-		return EnemyBounding.bottom >= gameAreaBounding.bottom
-	}
+		
 
-	collisionDetection() {
-		const EnemyBounding = this.Enemy.element.getBoundingClientRect()
-		const playerMoves = this.player.element.getBoundingClientRect()
-		const isInX =
-			EnemyBounding.left < playerMoves.right &&
-			EnemyBounding.right > playerMoves.left
-		const isInY =
-			EnemyBounding.bottom > playerMoves.top &&
-			EnemyBounding.top < playerMoves.bottom
-		//console.log(isInX && isInY)
-		return isInX && isInY
-	}
+		countScore(enemy) { //if the enemy is avoided score ++ AND the enemy is removed
+			const enemyBounding = enemy.element.getBoundingClientRect();
+		  
+			if (enemyBounding.bottom >= gameArea.clientHeight) {
+			  enemy.element.remove(); // remove enemy if it goes offscreen
+			  
+			  this.counter++;
+			  if (this.delay > 200) {
+				  this.delay -= 50
+			  }
+			//   console.log(`score counter ${this.counter}`)
+			  const score = document.querySelector("#score span")
+			  score.innerText = this.counter
+			}
+		  }
 
-	// scoreCount () {
-	// 	const score = document.querySelector("#score")  //the score board
-	// 	scoreNum ++
-	// 	score.innerText = `Score: ${scoreNum}` 
-	// }
+		crash(enemy) { //if the enemy crashes into the player, the life counter goes down
+			
+			// this.collisionOccurred = false
+			const enemyBounding = enemy.element.getBoundingClientRect();
+			const playerBounding = this.player.element.getBoundingClientRect();
+			
+			// if (enemyBounding.bottom >= playerBounding.top && ) 
+			const isInY = enemyBounding.bottom > playerBounding.top && enemyBounding.top < playerBounding.bottom
+			const isInX = enemyBounding.right > playerBounding.left && enemyBounding.left < playerBounding.right
+				if(
+			  isInX && isInY
+				)
+			{
+				if (!this.collisionOccurred) { // check if collision hasn't occurred yet
+					this.collisionOccurred = true; // set the variable to true to indicate a collision occurred
+					console.log('boom!');
+
+					
+					this.lifeCounter -=1
+					setTimeout(() => {
+						this.collisionOccurred = false
+					}, 1500)
+			} else {
+				console.log('no boom')
+			}
+			// return console.log('boom!');
+		  }}
+
+		//   crash(enemy){
+		// 	const enemyBounding = enemy.element.getBoundingClientRect();
+		// 	const enemyFromLeft = Math.floor (gameArea.clientWidth + enemyBounding.left)
+		// 	const playerFromLeft = Math.floor (gameArea.clientWidth + this.playerBody.left)
+		// 	console.log(enemyFromLeft, playerFromLeft)
+		// 	if(enemyBounding.bottom >= this.playerBody.top && enemyFromLeft === playerFromLeft){
+		// 		console.log('boom')
+		// 		this.lifeCounter -=1
+		// 		console.log(`life ${this.lifeCounter}`)
+		// 		}
+				
+		// 		const life = document.querySelector("#life span")
+		// 		life.innerText = this.lifeCounter
+		// 	}
+		  
 
 
-}
+
+		gameOver() {
+			  if(this.lifeCounter < 0){
+				  clearInterval(this.intervalId)
+				  gameOver.showModal()
+				  gameOver.classList.remove('hidden')
+			  }
+			  }
+			}
+	
+	
+
+
 
 window.addEventListener("keydown", handlePressedKeys)
 window.addEventListener("keyup", handleReleasedKeys)
 
 function startGame() {
 	new Game()
-	;
 
 }
 

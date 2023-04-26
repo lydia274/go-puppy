@@ -56,11 +56,11 @@ main {
 }
 
 .enemy {
-    border: solid 1px white;
-	width: 3rem;
-	height: 3rem;
+    border: solid 1px rgb(255, 0, 0);
+	width: 30px;
+	height: 30px;
 	position: absolute;
-	bottom: 1rem;
+	bottom: 1 px;
 	left: 5px;
     aspect-ratio: 1;   
     border-radius: 100vh;
@@ -72,10 +72,10 @@ main {
 #player {   
 
     border: solid 1px white;
-	width: 3rem;
-	height: 3rem;
+	width: 30px;
+	height: 30px;
 	position: absolute;
-	bottom: 1rem;
+	bottom: 1px;
 	left: 5px;
 
 }
