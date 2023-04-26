@@ -4,12 +4,14 @@
 const gameArea = document.querySelector("main") //the game area
 const gameAreaBounding = gameArea.getBoundingClientRect() // limits of the gaming area
 const gameOver = document.getElementById("end-game") // game LOST  screen
-const gameWon = document.getElementById("end-game") // game WON screen
+const gameWon = document.getElementById("game-won") // game WON screen
 const startGameScreen = document.getElementById("start-game") //SCREEN start game
-const startGameButton = document.getElementById("start-game-btn") // BUTTON start and restart game 
+const startGameButton = document.getElementById("start-game-btn") // BUTTON start  game 
+const restartGameButton = document.querySelectorAll(".restartButton") //restart game button
 const scoreboard = document.getElementById("scoreboard")
 
 startGameButton.addEventListener('click', startGame)
+// restartGameButton.addEventListener('click', startGame)
 
 startGameButton.addEventListener('click', function() {
 	startGameScreen.classList.add('hidden')
@@ -123,6 +125,7 @@ class Game {
 		
 		
 		
+		
 	}
 	
 	createEnemy(){
@@ -150,29 +153,28 @@ class Game {
 				this.crash(enemy) //HERE trying to check for collision
 			})
 
-			if (this.counter !== 0 && this.counter > 10 && this.counter < 20 ) {
+			if (this.counter !== 0 && this.counter > 10 && this.counter < 20 && this.levelCounter === 1 ) {
 				this.enemySpeed = 5
 				this.levelCounter++ //level 2
 				const level = document.querySelector("#level span")
 			  	level.innerText = this.levelCounter
 
-			} else if (this.counter > 20 && this.counter < 30) {
+			} else if (this.counter > 20 && this.counter < 30 && this.levelCounter === 2) {
 				this.enemySpeed = 7
 				this.levelCounter++ // level 3
 				const level = document.querySelector("#level span")
 			  	level.innerText = this.levelCounter
 
-			} else if (this.counter > 30 && this.counter < 40){
+			} else if (this.counter > 30 && this.counter < 40 && this.levelCounter === 3){
 				this.enemySpeed = 9
 				this.levelCounter++ // level 4
 				const level = document.querySelector("#level span")
 			  	level.innerText = this.levelCounter
 
-			} else if (this.counter === 50){
+			} else if (this.counter === 50 && this.levelCounter === 4){
 				/// YOU WIN
 				this.gameFinished = true
-				const gameWon = document.getElementById("game-won")
-				gameWon.classList.remove('hidden')
+				gameWon.classList.remove("hidden");
 
 			}
 
@@ -183,7 +185,7 @@ class Game {
 			if (pressedKeys.left) {
 				this.player.move("left")	
 				}
-			}, 1000 / 50) //animation 
+			}, 1000 / 60) //animation 
 		}
 		
 
@@ -201,10 +203,7 @@ class Game {
 			}
 		  }
 
-		levelUp(enemy) {
-			// for every 50 po
-			
-		}
+
 
 		crash(enemy) { //if the enemy crashes into the player, the life counter goes down
 			
@@ -249,6 +248,14 @@ function startGame() {
 	new Game()
 
 }
+
+
+//restart button
+const restartButton = document.querySelector("#restartButton");
+	restartButton.addEventListener("click", () => {
+
+	
+	});
 
 function handlePressedKeys(event) {
 	switch (event.code) {

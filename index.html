@@ -11,28 +11,35 @@
 	<body>
 	
 		<main class = "gameArea">
-			<!-- the game start screen -->
+			<!-- the GAME START screen -->
 			<div class="message" id="start-game">
-				<h1>Race day!</h1>
-				<article>Move left and right using the arrow keys to avoid collision</article>
-				<article>Press 'up' to speed up</article> 
+				<h1>*** LET'S RACE ***</h1>
+				
+				<p>Move left and right using the arrow keys to avoid collision</p> 
 				<button id="start-game-btn">Start</button>
+				
 			  </div>
 
-			<!-- the indicators at the top of the screen -->
+			<!-- the SCOREBOEARD  -->
 			<div id = "scoreboard" class = "legend hidden"> 
 				<article id = "score">Score: <span>0</span></article>
 				<article id = "level">Level:<span>1</span></article>
 				<article id = "life">Life:<span>3</span></article>
 			</div>
-			<!-- the game over screen -->
+
+			<!-- the GAME LOST screen -->
 			<div id="end-game" class="message hidden">
-				<h1>Game over</h1>
-				<button id="start-game-btn">Try better</button>
+				<h1>Boo! Game over</h1>
+				<p>Play again and prove you are not a loser</p>
+				<button class="restartButton">Play again</button>
+
 			</div>
+
 			<div id= "game-won" class = "message hidden">
-				<h3>You are a winner!</h3>
-				<p>everyone loves you</p>
+				<h4>You are a winner!</h4>
+				<p>Everyone loves you!</p>
+				<button class="restartButton">Play again</button>
+
 
 			</div>
 		</main>
