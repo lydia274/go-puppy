@@ -3,14 +3,18 @@
 
 const gameArea = document.querySelector("main") //the game area
 const gameAreaBounding = gameArea.getBoundingClientRect() // limits of the gaming area
-const gameOver = document.getElementById("end-game") // game over 
+const gameOver = document.getElementById("end-game") // game LOST  screen
+const gameWon = document.getElementById("end-game") // game WON screen
 const startGameScreen = document.getElementById("start-game") //SCREEN start game
-const startGameButton = document.getElementById("start-game-btn") // BUTTON start game 
+const startGameButton = document.getElementById("start-game-btn") // BUTTON start and restart game 
+const scoreboard = document.getElementById("scoreboard")
 
 startGameButton.addEventListener('click', startGame)
 
 startGameButton.addEventListener('click', function() {
 	startGameScreen.classList.add('hidden')
+	scoreboard.classList.remove('hidden')
+
 	})
 
 	const speed = 5
@@ -81,9 +85,6 @@ class Enemy {
 		this.setPosition()
 	}
 
-	width() {
-
-	}
 
 	createEnemy() {
 		const div = document.createElement("div")
@@ -97,9 +98,8 @@ class Enemy {
 		this.element.style.top = `${this.y}px`
 	}
 	
-	moveEnemy() {
-		this.y++ //making it move
-				
+	moveEnemy(speed) {
+		this.y  = this.y +  speed + 1  //making it move		
 	}
 
 }
@@ -110,38 +110,71 @@ class Game {
 	
 	constructor() {
 		this.player = new Player()
+		this.createEnemy()	
 		this.enemies = []
 		this.intervalId = null
 		this.counter = 0
 		this.lifeCounter = 3
-		this.delay = 1500
+		this.levelCounter = 1
 		this.animate()
-		this.createEnemy()	
 		this.playerBody = this.player.element.getBoundingClientRect()
+		this.enemySpeed = 3
+		this.gameFinished = false
 		
 		
 		
 	}
-
 	
 	createEnemy(){
 		setTimeout(()=>{
 			let newEnemy = new Enemy()
 			this.enemies.push(newEnemy)
-			
+			if (this.gameFinished) {
+				return
+			}
 			this.createEnemy()
-		}, this.delay)
+		}, 400)
 	}
-	
 
+
+
+	
 	animate() {
+
 		this.intervalId = setInterval(() => {
 			this.enemies.forEach((enemy) => {
-				enemy.moveEnemy()
+				enemy.moveEnemy(this.enemySpeed)
 				enemy.setPosition()
-				this.countScore(enemy) 
+				this.countScore(enemy)
+				// this.levelUp(enemy)
 				this.crash(enemy) //HERE trying to check for collision
 			})
+
+			if (this.counter !== 0 && this.counter > 10 && this.counter < 20 ) {
+				this.enemySpeed = 5
+				this.levelCounter++ //level 2
+				const level = document.querySelector("#level span")
+			  	level.innerText = this.levelCounter
+
+			} else if (this.counter > 20 && this.counter < 30) {
+				this.enemySpeed = 7
+				this.levelCounter++ // level 3
+				const level = document.querySelector("#level span")
+			  	level.innerText = this.levelCounter
+
+			} else if (this.counter > 30 && this.counter < 40){
+				this.enemySpeed = 9
+				this.levelCounter++ // level 4
+				const level = document.querySelector("#level span")
+			  	level.innerText = this.levelCounter
+
+			} else if (this.counter === 50){
+				/// YOU WIN
+				this.gameFinished = true
+				const gameWon = document.getElementById("game-won")
+				gameWon.classList.remove('hidden')
+
+			}
 
 			if (pressedKeys.right) {
 				this.player.move("right")
@@ -150,7 +183,7 @@ class Game {
 			if (pressedKeys.left) {
 				this.player.move("left")	
 				}
-			}, 1500 / 60) //animation speed
+			}, 1000 / 50) //animation 
 		}
 		
 
@@ -161,14 +194,17 @@ class Game {
 			  enemy.element.remove(); // remove enemy if it goes offscreen
 			  
 			  this.counter++;
-			  if (this.delay > 200) {
-				  this.delay -= 50
-			  }
+			  
 			//   console.log(`score counter ${this.counter}`)
 			  const score = document.querySelector("#score span")
 			  score.innerText = this.counter
 			}
 		  }
+
+		levelUp(enemy) {
+			// for every 50 po
+			
+		}
 
 		crash(enemy) { //if the enemy crashes into the player, the life counter goes down
 			
@@ -179,56 +215,33 @@ class Game {
 			// if (enemyBounding.bottom >= playerBounding.top && ) 
 			const isInY = enemyBounding.bottom > playerBounding.top && enemyBounding.top < playerBounding.bottom
 			const isInX = enemyBounding.right > playerBounding.left && enemyBounding.left < playerBounding.right
-				if(
-			  isInX && isInY
-				)
-			{
-				if (!this.collisionOccurred) { // check if collision hasn't occurred yet
-					this.collisionOccurred = true; // set the variable to true to indicate a collision occurred
-					console.log('boom!');
+				if(isInX && isInY) {
 
-					
-					this.lifeCounter -=1
-					setTimeout(() => {
-						this.collisionOccurred = false
-					}, 1500)
-			} else {
-				console.log('no boom')
-			}
-			// return console.log('boom!');
+					if (!this.collisionOccurred) { // check if collision hasn't occurred yet
+						this.collisionOccurred = true; // set the variable to true to indicate a collision occurred
+						console.log('boom!');
+
+						const life = document.querySelector("#life span")
+						this.lifeCounter -=1
+						life.innerText = this.lifeCounter
+						if(this.lifeCounter <= 0){
+							this.gameFinished = true
+							this.gameOver()
+						}
+						setTimeout(() => {
+							this.collisionOccurred = false
+						}, 1500)
+					}
 		  }}
 
-		//   crash(enemy){
-		// 	const enemyBounding = enemy.element.getBoundingClientRect();
-		// 	const enemyFromLeft = Math.floor (gameArea.clientWidth + enemyBounding.left)
-		// 	const playerFromLeft = Math.floor (gameArea.clientWidth + this.playerBody.left)
-		// 	console.log(enemyFromLeft, playerFromLeft)
-		// 	if(enemyBounding.bottom >= this.playerBody.top && enemyFromLeft === playerFromLeft){
-		// 		console.log('boom')
-		// 		this.lifeCounter -=1
-		// 		console.log(`life ${this.lifeCounter}`)
-		// 		}
-				
-		// 		const life = document.querySelector("#life span")
-		// 		life.innerText = this.lifeCounter
-		// 	}
-		  
-
-
-
 		gameOver() {
-			  if(this.lifeCounter < 0){
+
 				  clearInterval(this.intervalId)
-				  gameOver.showModal()
 				  gameOver.classList.remove('hidden')
 			  }
-			  }
+			  
 			}
-	
-	
-
-
-
+		
 window.addEventListener("keydown", handlePressedKeys)
 window.addEventListener("keyup", handleReleasedKeys)
 

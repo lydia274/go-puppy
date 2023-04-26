@@ -20,16 +20,21 @@
 			  </div>
 
 			<!-- the indicators at the top of the screen -->
-			<div class = "legend"> 
-				<article id = "score">Score: <span></span></article>
-				<article id = "level">Level:<span></span></article>
-				<article id = "life">Life:<span></span></article>
+			<div id = "scoreboard" class = "legend hidden"> 
+				<article id = "score">Score: <span>0</span></article>
+				<article id = "level">Level:<span>1</span></article>
+				<article id = "life">Life:<span>3</span></article>
 			</div>
 			<!-- the game over screen -->
-			<dialog id="end-game" class="message hidden">
+			<div id="end-game" class="message hidden">
 				<h1>Game over</h1>
-				<button id="restart">Restart</button>
-			</dialog>
+				<button id="start-game-btn">Try better</button>
+			</div>
+			<div id= "game-won" class = "message hidden">
+				<h3>You are a winner!</h3>
+				<p>everyone loves you</p>
+
+			</div>
 		</main>
 
 	</body>
