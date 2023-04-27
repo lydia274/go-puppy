@@ -1,129 +1,147 @@
 * {
-	box-sizing: border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-
-
-dialog.shown::backdrop {
-	scale: 1;
-	backdrop-filter: blur(2px) sepia(20) brightness(50%);
+  box-sizing: border-box;
+  font-family: "Press Start 2P", cursive;
 }
 
 main {
-	height: calc(100vh - 4rem);
-	aspect-ratio: 9/16;
-    background-color: black;
-	
-    background-color: #0fc7f5;
-    background-image: radial-gradient(at 19% 70%, hsla(313, 91%, 70%, 1) 0, hsla(313, 91%, 70%, 0) 50%),
-    radial-gradient(at 47% 60%, rgb(14, 12, 143) 0, hsla(296, 93%, 58%, 0) 50%),
-    radial-gradient(at 92% 10%, hsla(253, 87%, 56%, 1) 0, hsla(253, 87%, 56%, 0) 50%),
-    radial-gradient(at 4% 6%, rgb(17, 0, 255) 0, hsla(290, 92%, 55%, 0) 50%),
-    radial-gradient(at 44% 29%, hsla(276, 93%, 67%, 1) 0, hsla(276, 93%, 67%, 0) 50%),
-    radial-gradient(at 23% 29%, rgb(3, 0, 175) 0, hsla(318, 85%, 53%, 0) 50%),
-    radial-gradient(at 73% 22%, hsla(284, 88%, 50%, 1) 0, hsla(284, 88%, 50%, 0) 50%);
-
-	margin: auto;
-	position: relative;
+  height: calc(100vh - 4rem);
+  aspect-ratio: 9/16;
+  background-color: black;
+  background-image: url("/img/bg.JPG");
+  margin: auto;
+  position: relative;
+  background-size: contain;
+  animation: bg-movement 0.3s steps(3) infinite;
 }
 
-.gameArea {
+@keyframes bg-movement {
+  0% {
+    background-position: 0px 0px;
+  }
 
+  100% {
+    background-position: 0px -120px;
+  }
 }
 
 .score {
-    color: white;
-    border: solid 1px white;
-    /* padding: 3 rem; */
-    width: 30%;
-
-
+  color: white;
+  border: solid 1px white;
+  width: 30%;
 }
 
 .legend {
-    color: white;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	align-items: stretch;
-	align-content: space-between;
-
-    /* position: absolute;
-    bottom: 0;  */
-
+  color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: stretch;
+  align-content: space-between;
 }
 
 .enemy {
-    border: solid 1px rgb(255, 0, 0);
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	bottom: 1 px;
-	left: 5px;
-    aspect-ratio: 1;   
-    border-radius: 100vh;
-
-    top: 50px;
-
+  background-image: url("/img/white.png");
+  width: 36px;
+  height: 50px;
+  position: absolute;
+  animation: sprite-animation 0.3s steps(3) infinite;
 }
 
-#player {   
+#player {
+  position: absolute;
+  bottom: 30px;
+  background-image: url("/img/black.png");
 
-    border: solid 1px white;
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	bottom: 1px;
-	left: 5px;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 50px;
 
+  animation: sprite-animation 0.3s steps(3) infinite;
 }
 
-#end-game  {
-    /* color: white;
-    font-size: 0.8rem; 
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0);
-    border-radius: 12px;
-    border: solid 1px white;
-    width: 20vw;
-    height: 20vh; */
+@keyframes sprite-animation {
+  0% {
+    background-position: -368px -38px;
+  }
+
+  100% {
+    background-position: -366px -230px;
+  }
 }
 
 /* the start game screen */
 
-h1{
-    font-size: 1rem;
+h1 {
+  font-size: 1rem;
 }
 
-/* start game & game over messages */
-.message{
-    position: absolute;
-    color: white;
-    background-color: rgba(255, 0, 0, 0);
-    border-radius: 12px;
-    border: solid 1px white;
-    width: 20vw;
-    height: auto;
-    text-align: center;
-    top: 30vh;
-    left: 1.5vw;
-    font-size: 0.8rem;
+/* start game, game lost and game won messages */
+.message {
+  position: absolute;
+  color: white;
+  background-color: rgba(255, 0, 0, 0);
+  border-radius: 12px;
+  border: solid 1px white;
+  width: 20vw;
+  height: auto;
+  text-align: center;
+  top: 30vh;
+  left: 1.5vw;
+  font-size: 0.8rem;
 }
 
-button{ 
-    background-color: rgba(255, 255, 255, 0);
-    font-weight: bold;
-    color: dodgerblue;
-    border-radius: 12px;
-    border: solid 1px dodgerblue;
-    padding: 0.5rem 1rem ;
-    margin: 1rem;
-    cursor: pointer;
+button {
+  background-color: rgba(255, 255, 255, 0);
+  font-weight: bold;
+  color: dodgerblue;
+  border-radius: 12px;
+  border: solid 1px dodgerblue;
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  cursor: pointer;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
+#gooddog {
+  background-image: url("/img/brown.png");
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 60px;
+
+  left: 50px;
+  animation: good-dog-sprite 0.3s steps(3) infinite;
+}
+
+@keyframes good-dog-sprite {
+  0% {
+    background-position: -302px -36px;
+  }
+
+  100% {
+    background-position: -302px -232px;
+  }
+}
+
+#baddog {
+  background-image: url("/img/brown.png");
+  background-repeat: no-repeat;
+  width: 40px;
+  height: 60px;
+
+  left: 50px;
+  animation: good-dog-sprite 0.3s steps(7) infinite;
+}
+
+@keyframes bad-dog-sprite {
+  0% {
+    background-position: -34px -44px;
+  }
+
+  100% {
+    background-position: -32px -448px;
+  }
+}

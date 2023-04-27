@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./styles/styles.css" />
-		<script src="./src/index.js" type="module"></script>
-		<title>Racing game</title>
-	</head>
-	<body>
-	
-		<main class = "gameArea">
-			<!-- the GAME START screen -->
-			<div class="message" id="start-game">
-				<h1>*** LET'S RACE ***</h1>
-				
-				<p>Move left and right using the arrow keys to avoid collision</p> 
-				<button id="start-game-btn">Start</button>
-				
-			  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/styles.css" />
 
-			<!-- the SCOREBOEARD  -->
-			<div id = "scoreboard" class = "legend hidden"> 
-				<article id = "score">Score: <span>0</span></article>
-				<article id = "level">Level:<span>1</span></article>
-				<article id = "life">Life:<span>3</span></article>
-			</div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
-			<!-- the GAME LOST screen -->
-			<div id="end-game" class="message hidden">
-				<h1>Boo! Game over</h1>
-				<p>Play again and prove you are not a loser</p>
-				<button class="restartButton">Play again</button>
+    <script src="./src/index.js" type="module"></script>
+    <title>Racing game</title>
+  </head>
+  <body>
+    <main class="gameArea">
+      <!-- the GAME START screen -->
+      <div class="message" id="start-game">
+        <h1>Go home, puppy!</h1>
+        <p>Get home as fast as possible!</p>
 
-			</div>
+        <p>Move left and right using the arrow keys to avoid the fight</p>
+        <button id="start-game-btn">START</button>
+      </div>
 
-			<div id= "game-won" class = "message hidden">
-				<h4>You are a winner!</h4>
-				<p id="resultScore">Your score: </p>
-				<p>Everyone loves you!</p>
-				<button class="restartButton">Play again</button>
+      <!-- the SCOREBOEARD  -->
+      <div id="scoreboard" class="legend hidden">
+        <article id="score">Score: <span>0</span></article>
+        <article id="level">Level:<span>1</span></article>
+        <article id="life">Life:<span>3</span></article>
+      </div>
 
+      <!-- the GAME LOST screen -->
+      <div id="game-lost" class="message hidden">
+        <h1>Bad dog!</h1>
+        <p>STAY OUT OF TROUBLE FOR GODS SAKE</p>
+        <button class="restartButton">PLAY AGAIN</button>
+      </div>
 
-			</div>
-		</main>
+      <!-- GAME WON -->
 
-	</body>
+      <div id="game-won" class="message hidden">
+          <h2>You are a wonderful dog!</h2>
+          <p>Everyone loves you!</p>
+          <button class="restartButton">PLAY AGAIN</button>
+		  <div id="gooddog"></div>
+		  </div>
+       
+      </div>
+    </main>
+  </body>
 </html>
