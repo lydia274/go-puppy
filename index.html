@@ -14,17 +14,17 @@
 	
 	<!-- end of font -->
 	<script src="./src/index.js" type="module"></script>
-    <title>Racing game</title>
+    <title>Go Puppy!</title>
   </head>
   <body>
     <main class="gameArea">
       <!-- the GAME START screen -->
       <div class="message" id="start-game">
-        <h1>Go home, puppy!</h1>
+        <h1 id="gopuppy">GO PUPPY!</h1>
         <p>Get home as fast as possible!</p>
-
         <p>Move left and right using the arrow keys to avoid the fight</p>
-        <button id="start-game-btn">START</button>
+        <div id="gooddogstart"></div>
+		<button id="start-game-btn">START</button>
       </div>
 
       <!-- the SCOREBOEARD  -->
@@ -34,20 +34,23 @@
         <article id="life">Life:<span>3</span></article>
       </div>
 
+
       <!-- the GAME LOST screen -->
       <div id="game-lost" class="message hidden">
         <h1>You are a bad dog!</h1>
         <p>STAY OUT OF TROUBLE FOR GODS SAKE</p>
+		<div id="baddog"></div>
         <button class="restartButton">PLAY AGAIN</button>
       </div>
 
       <!-- GAME WON -->
 
       <div id="game-won" class="message hidden">
-          <h2>You are a wonderful dog!</h2>
+          <h1>You are a wonderful dog!</h1>
           <p>Everyone loves you!</p>
+		  <div id="gooddogwin"></div>
           <button class="restartButton">PLAY AGAIN</button>
-		  <div id="gooddog"></div>
+		  
 		  </div>
        
       </div>

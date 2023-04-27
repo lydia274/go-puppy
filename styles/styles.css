@@ -3,6 +3,8 @@
   font-family: "Press Start 2P", cursive;
 }
 
+/* game area properties */
+
 main {
   height: calc(100vh - 4rem);
   aspect-ratio: 9/16;
@@ -14,6 +16,10 @@ main {
   animation: bg-movement 0.3s steps(3) infinite;
 }
 
+#gopuppy {
+  text-shadow: dodgerblue 5px -5px;
+}
+
 @keyframes bg-movement {
   0% {
     background-position: 0px 0px;
@@ -23,7 +29,7 @@ main {
     background-position: 0px -120px;
   }
 }
-
+/* scoreboard and indications */
 .score {
   color: white;
   border: solid 1px white;
@@ -39,10 +45,10 @@ main {
   justify-content: space-around;
   align-items: stretch;
   align-content: space-between;
-  margin-top: 20px;
   border: solid 2px white;
 }
 
+/* obstacles and player */
 .enemy {
   background-image: url("/img/white.png");
   width: 36px;
@@ -73,13 +79,33 @@ main {
   }
 }
 
-/* the start game screen */
-
-h1 {
-  font-size: 2rem;
+.boom {
+  width: 140px;
+  height: 150px;
+  position: absolute;
+  background-image: url("/img/boom.png");
+  background-repeat: no-repeat;
+  animation: kaboom 0.5s steps(7) infinite;
 }
 
-/* start game, game lost and game won messages */
+@keyframes kaboom {
+  0% {
+    background-position: -24px -73px;
+  }
+
+  100% {
+    background-position: -1154px -31px;
+  }
+}
+
+/*  message boxes */
+
+h1 {
+  font-size: 1.3rem;
+  color: red;
+  width: auto;
+}
+
 .message {
   position: absolute;
   color: dodgerblue;
@@ -89,33 +115,88 @@ h1 {
   width: 20vw;
   height: auto;
   text-align: center;
-  top: 30vh;
+  top: 10vh;
   left: 1.5vw;
   font-size: 0.8rem;
   z-index: 1;
 }
 
-button {
-  background-color: rgba(255, 255, 255, 0);
-  font-weight: bold;
-  color: dodgerblue;
-  border: solid 3px dodgerblue;
-  padding: 0.5rem 1rem;
-  margin: 1rem;
-  cursor: pointer;
+#gooddogstart {
+  background-image: url("/img/brown.png");
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 60px;
+  position: relative;
+
+  left: 40%;
+  animation: good-dog-start 0.4s steps(4) infinite;
 }
+
+@keyframes good-dog-start {
+  0% {
+    background-position: -228px -42px;
+  }
+
+  100% {
+    background-position: -228px -296px;
+  }
+}
+
+button:hover {
+  /* Hover state */
+  background-color: #d9d9d9;
+  color: yellow;
+  box-shadow: none;
+}
+
+button {
+  /* Neutral state */
+  background-color: #07dd00;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 20px;
+  text-shadow: 1px 1px #444;
+  box-shadow: 3px 3px #444;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+button:hover {
+  /* Hover state */
+  background-color: #07dd00;
+  color: yellow;
+  box-shadow: none;
+}
+
+button:active {
+  /* Clicked state */
+  background-color: #eeff00;
+  color: white;
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+/* reusable class to hide and show elements */
 
 .hidden {
   display: none;
 }
 
-#gooddog {
+/* you WIN screen*/
+
+#gooddogwin {
   background-image: url("/img/brown.png");
   background-repeat: no-repeat;
   width: 40px;
   height: 60px;
+  position: relative;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
 
-  left: 50px;
+  left: 40%;
   animation: good-dog-sprite 0.3s steps(3) infinite;
 }
 
@@ -129,14 +210,16 @@ button {
   }
 }
 
+/* game LOST screen*/
+
 #baddog {
   background-image: url("/img/brown.png");
   background-repeat: no-repeat;
-  width: 40px;
-  height: 60px;
-
-  left: 50px;
-  animation: good-dog-sprite 0.3s steps(7) infinite;
+  width: 62px;
+  height: 54px;
+  position: relative;
+  left: 40%;
+  animation: bad-dog-sprite 2s steps(4) infinite;
 }
 
 @keyframes bad-dog-sprite {
@@ -145,6 +228,6 @@ button {
   }
 
   100% {
-    background-position: -32px -448px;
+    background-position: -34px -316px;
   }
 }

@@ -139,6 +139,7 @@ class Game {
     this.counter = 0;
     this.lifeCounter = 3;
     this.levelCounter = 1;
+    level.innerText = this.levelCounter;
     this.animate();
     this.playerBody = this.player.element.getBoundingClientRect();
     this.enemySpeed = 3;
@@ -162,7 +163,6 @@ class Game {
         enemy.moveEnemy(this.enemySpeed);
         enemy.setPosition();
         this.countScore(enemy);
-        // this.levelUp(enemy)
         this.crash(enemy); //HERE trying to check for collision
       });
 
@@ -198,6 +198,7 @@ class Game {
         /// YOU WIN
         this.gameFinished = true;
         gameWon.classList.remove("hidden");
+        level.innerText = "WIN";
       }
 
       if (pressedKeys.right) {
@@ -248,13 +249,19 @@ class Game {
         const life = document.querySelector("#life span");
         this.lifeCounter -= 1;
         life.innerText = this.lifeCounter;
+
+        let playerBoom = document.getElementById("player");
+        setTimeout(() => {
+          playerBoom.classList.add("boom");
+        }, 1000);
+
         if (this.lifeCounter <= 0) {
           this.gameFinished = true;
           this.gameOver();
         }
         setTimeout(() => {
           this.collisionOccurred = false;
-        }, 1500);
+        }, 1000);
       }
     }
   }
