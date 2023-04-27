@@ -32,12 +32,15 @@ main {
 
 .legend {
   color: white;
+  font-size: 0.8rem;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: stretch;
   align-content: space-between;
+  margin-top: 20px;
+  border: solid 2px white;
 }
 
 .enemy {
@@ -73,30 +76,30 @@ main {
 /* the start game screen */
 
 h1 {
-  font-size: 1rem;
+  font-size: 2rem;
 }
 
 /* start game, game lost and game won messages */
 .message {
   position: absolute;
-  color: white;
-  background-color: rgba(255, 0, 0, 0);
+  color: dodgerblue;
+  background-color: white;
   border-radius: 12px;
-  border: solid 1px white;
+  border: solid 5px yellow;
   width: 20vw;
   height: auto;
   text-align: center;
   top: 30vh;
   left: 1.5vw;
   font-size: 0.8rem;
+  z-index: 1;
 }
 
 button {
   background-color: rgba(255, 255, 255, 0);
   font-weight: bold;
   color: dodgerblue;
-  border-radius: 12px;
-  border: solid 1px dodgerblue;
+  border: solid 3px dodgerblue;
   padding: 0.5rem 1rem;
   margin: 1rem;
   cursor: pointer;
