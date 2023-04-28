@@ -1,3 +1,4 @@
+/* Global settings */
 * {
   box-sizing: border-box;
   font-family: "Press Start 2P", cursive;
@@ -16,6 +17,7 @@ main {
   animation: bg-movement 0.3s steps(3) infinite;
 }
 
+/* Start screen */
 #gopuppy {
   text-shadow: dodgerblue 5px -5px;
 }
@@ -29,6 +31,28 @@ main {
     background-position: 0px -120px;
   }
 }
+
+#gooddogstart {
+  background-image: url(./../img/brown.png);
+  background-repeat: no-repeat;
+  width: 55px;
+  height: 60px;
+  position: relative;
+
+  left: 40%;
+  animation: good-dog-start 0.4s steps(4) infinite;
+}
+
+@keyframes good-dog-start {
+  0% {
+    background-position: -228px -42px;
+  }
+
+  100% {
+    background-position: -228px -296px;
+  }
+}
+
 /* scoreboard and indications */
 .score {
   color: white;
@@ -79,6 +103,8 @@ main {
   }
 }
 
+/* Special effect */
+
 .boom {
   width: 140px;
   height: 150px;
@@ -119,27 +145,6 @@ h1 {
   left: 1.5vw;
   font-size: 0.8rem;
   z-index: 1;
-}
-
-#gooddogstart {
-  background-image: url(./../img/brown.png);
-  background-repeat: no-repeat;
-  width: 55px;
-  height: 60px;
-  position: relative;
-
-  left: 40%;
-  animation: good-dog-start 0.4s steps(4) infinite;
-}
-
-@keyframes good-dog-start {
-  0% {
-    background-position: -228px -42px;
-  }
-
-  100% {
-    background-position: -228px -296px;
-  }
 }
 
 button:hover {
@@ -185,7 +190,7 @@ button:active {
   display: none;
 }
 
-/* you WIN screen*/
+/* Game WIN screen*/
 
 #gooddogwin {
   background-image: url(./../img/brown.png);

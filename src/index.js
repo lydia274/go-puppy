@@ -1,10 +1,3 @@
-//general items
-//start game button
-//class Player
-//class Enemy
-//class Game
-//keys down&up
-
 //  General items declarations
 
 const gameArea = document.querySelector("main"); //the game area
@@ -40,6 +33,7 @@ restartGameButton.forEach((button) => {
   button.addEventListener("click", restartGame);
 });
 
+//Player Class
 class Player {
   constructor() {
     this.element = this.createPlayer();
@@ -92,6 +86,7 @@ class Player {
   }
 }
 
+//Enemy class
 class Enemy {
   constructor() {
     this.element = this.createEnemy();
@@ -120,6 +115,7 @@ class Enemy {
   }
 }
 
+//Game class
 class Game {
   constructor() {
     this.player = new Player();
@@ -233,11 +229,9 @@ class Game {
   crash(enemy) {
     //if the enemy crashes into the player, the life counter goes down
 
-    // this.collisionOccurred = false
     const enemyBounding = enemy.element.getBoundingClientRect();
     const playerBounding = this.player.element.getBoundingClientRect();
 
-    // if (enemyBounding.bottom >= playerBounding.top && )
     const isInY =
       enemyBounding.bottom > playerBounding.top &&
       enemyBounding.top < playerBounding.bottom;
