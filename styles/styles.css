@@ -9,7 +9,7 @@ main {
   height: calc(100vh - 4rem);
   aspect-ratio: 9/16;
   background-color: black;
-  background-image: url("./img/bg.JPG");
+  background-image: url("/img/bg.jpg");
   margin: auto;
   position: relative;
   background-size: contain;
@@ -50,7 +50,7 @@ main {
 
 /* obstacles and player */
 .enemy {
-  background-image: url("./img/white.png");
+  background-image: url("/img/white.png");
   width: 36px;
   height: 50px;
   position: absolute;
@@ -60,7 +60,7 @@ main {
 #player {
   position: absolute;
   bottom: 30px;
-  background-image: url("./img/black.png");
+  background-image: url("/img/black.png");
 
   background-repeat: no-repeat;
   width: 36px;
