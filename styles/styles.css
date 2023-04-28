@@ -9,7 +9,7 @@ main {
   height: calc(100vh - 4rem);
   aspect-ratio: 9/16;
   background-color: black;
-  background-image: url("./img/bg.jpg");
+  background-image: url("./../img/bg.jpg");
   margin: auto;
   position: relative;
   background-size: contain;
@@ -50,7 +50,7 @@ main {
 
 /* obstacles and player */
 .enemy {
-  background-image: url("./img/white.png");
+  background-image: url("./../img/white.png");
   width: 36px;
   height: 50px;
   position: absolute;
@@ -60,7 +60,7 @@ main {
 #player {
   position: absolute;
   bottom: 30px;
-  background-image: url("./img/black.png");
+  background-image: url("./../img/black.png");
 
   background-repeat: no-repeat;
   width: 36px;
@@ -83,7 +83,7 @@ main {
   width: 140px;
   height: 150px;
   position: absolute;
-  background-image: url("./img/boom.png");
+  background-image: url("./../img/boom.png");
   background-repeat: no-repeat;
   animation: kaboom 0.5s steps(7) infinite;
 }
@@ -122,7 +122,7 @@ h1 {
 }
 
 #gooddogstart {
-  background-image: url(/img/brown.png);
+  background-image: url(./../img/brown.png);
   background-repeat: no-repeat;
   width: 55px;
   height: 60px;
@@ -188,7 +188,7 @@ button:active {
 /* you WIN screen*/
 
 #gooddogwin {
-  background-image: url(/img/brown.png);
+  background-image: url(./../img/brown.png);
   background-repeat: no-repeat;
   width: 40px;
   height: 60px;
@@ -213,7 +213,7 @@ button:active {
 /* game LOST screen*/
 
 #baddog {
-  background-image: url(/img/brown.png);
+  background-image: url(./../img/brown.png);
   background-repeat: no-repeat;
   width: 62px;
   height: 54px;
