@@ -16,6 +16,10 @@ const gameWon = document.getElementById("game-won"); // game WON screen
 const startGameScreen = document.getElementById("start-game"); //SCREEN start game
 const startGameButton = document.getElementById("start-game-btn"); // BUTTON start  game
 
+const level = document.querySelector("#level span");
+const lifeNumber = document.querySelector("#life span");
+const scoreNumber = document.querySelector("#score span");
+
 //start Game
 startGameButton.addEventListener("click", startGame);
 startGameButton.addEventListener("click", function () {
@@ -123,6 +127,7 @@ class Game {
     this.enemies = [];
     this.intervalId = null;
     this.counter = 0;
+
     this.lifeCounter = 3;
     this.levelCounter = 1;
     this.animate();
@@ -137,7 +142,9 @@ class Game {
     this.enemies = [];
     this.intervalId = null;
     this.counter = 0;
+    scoreNumber.innerText = this.counter;
     this.lifeCounter = 3;
+    lifeNumber.innerText = this.lifeCounter;
     this.levelCounter = 1;
     level.innerText = this.levelCounter;
     this.animate();
@@ -174,7 +181,6 @@ class Game {
       ) {
         this.enemySpeed = 5;
         this.levelCounter++; //level 2
-        const level = document.querySelector("#level span");
         level.innerText = this.levelCounter;
       } else if (
         this.counter > 20 &&
@@ -183,7 +189,6 @@ class Game {
       ) {
         this.enemySpeed = 7;
         this.levelCounter++; // level 3
-        const level = document.querySelector("#level span");
         level.innerText = this.levelCounter;
       } else if (
         this.counter > 30 &&
@@ -192,7 +197,6 @@ class Game {
       ) {
         this.enemySpeed = 9;
         this.levelCounter++; // level 4
-        const level = document.querySelector("#level span");
         level.innerText = this.levelCounter;
       } else if (this.counter === 50 && this.levelCounter === 4) {
         /// YOU WIN
@@ -252,8 +256,14 @@ class Game {
 
         let playerBoom = document.getElementById("player");
         setTimeout(() => {
-          playerBoom.classList.add("boom");
-        }, 1000);
+          console.log(" big boom!");
+
+          playerBoom.style.backgroundImage = "url('./img/boom.png')";
+          playerBoom.style.width = "140px";
+          playerBoom.style.height = "150px";
+          playerBoom.style.animation = "kaboom 0.3s steps(7) infinite";
+          playerBoom.style.transform = "translate(-30px, 0px)";
+        }, 100);
 
         if (this.lifeCounter <= 0) {
           this.gameFinished = true;
@@ -261,7 +271,13 @@ class Game {
         }
         setTimeout(() => {
           this.collisionOccurred = false;
-        }, 1000);
+          playerBoom.style.backgroundImage = "url('./img/black.png')";
+          playerBoom.style.width = "36px";
+          playerBoom.style.height = "50px";
+          playerBoom.style.animation =
+            "sprite-animation 0.3s steps(3) infinite";
+          playerBoom.style.transform = "translate(0px, 0px)";
+        }, 500);
       }
     }
   }
