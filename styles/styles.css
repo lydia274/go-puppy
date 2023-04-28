@@ -9,7 +9,7 @@ main {
   height: calc(100vh - 4rem);
   aspect-ratio: 9/16;
   background-color: black;
-  background-image: url("./../img/bg.jpg");
+  background-image: url("./../img/bg.JPG");
   margin: auto;
   position: relative;
   background-size: contain;
